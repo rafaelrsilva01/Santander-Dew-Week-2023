@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:santander
+    username: santander
+    password:
+    driverClassName: org.h2.Driver
+
+  jpa:
+    show-sql: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: create # validate | update | create | create-drop
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        trace: false
+  springdoc:
+    swagger-ui:
+      path: /swagger-ui-custom.html
