@@ -7,7 +7,10 @@ import org.slf4j.helpers.CheckReturnValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.util.UriComponents;
 
+import java.net.URI;
 import java.util.List;
 
 @CrossOrigin
@@ -24,8 +27,13 @@ public class UserController {
     @PostMapping
     public ResponseEntity<Void> saveUser(@RequestBody User user){
 
-        userService.createUser(user);
-        return ResponseEntity.ok().build();
+        var userResponse = userService.createUser(user);
+       URI locattion = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(userResponse.getId())
+                .toUri();
+        return ResponseEntity.created(locattion).build();
 
     }
     @GetMapping

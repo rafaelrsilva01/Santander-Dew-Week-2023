@@ -29,7 +29,7 @@ public class UserService {
         this.featuresRepository = featuresRepository;
     }
 
-    public void createUser(User user){
+    public User createUser(User user){
 
         var card = cardRepository.save(user.getCard());
         var account = accountRepository.save(user.getAccount());
@@ -39,7 +39,7 @@ public class UserService {
         user.setAccount(account);
         user.setNews(news);
         user.setFeatures(features);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
     public List<User> listUser(){
         return userRepository.findAll();
